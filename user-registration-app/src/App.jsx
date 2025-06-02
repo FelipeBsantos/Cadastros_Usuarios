@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import UserForm from './UserForm';
+import './index.css';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -24,10 +25,9 @@ function TabPanel(props) {
       id={`tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
       {...other}
-      style={{ height: '100%', width: '100%' }}
     >
       {value === index && (
-        <Box sx={{ p: 3, height: '100%', width: '100%' }}>{children}</Box>
+        <Box sx={{ p: 3 }}>{children}</Box>
       )}
     </div>
   );
@@ -58,16 +58,21 @@ export default function App() {
   return (
     <Box
       sx={{
-        height: '100vh',
-        bgcolor: 'background.default',
-        background:
-          'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        display: 'flex',
-        flexDirection: 'column',
-        color: 'white',
-        fontFamily: "'Roboto', sans-serif",
-      }}
-    >
+      height: '100vh', // Ocupa toda a altura da tela
+      width: '100vw', // Ocupa toda a largura da tela
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', // Centraliza verticalmente
+      alignItems: 'center', // Centraliza horizontalmente
+      bgcolor: 'background.default',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      color: 'white',
+      fontFamily: "'Roboto', sans-serif",
+      padding: 0, // Remove qualquer padding
+      margin: 0, // Remove qualquer margem
+  }}
+>
+
       <Tabs
         value={tabIndex}
         onChange={handleTabChange}
@@ -77,22 +82,25 @@ export default function App() {
         sx={{
           bgcolor: 'rgba(255,255,255,0.1)',
           boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+          width: '100%',
+          maxWidth: '600px',
+          borderRadius: 2,
+          mb: 3,
         }}
       >
         <Tab label="Cadastro" id="tab-0" aria-controls="tabpanel-0" />
         <Tab label="Usuários" id="tab-1" aria-controls="tabpanel-1" />
       </Tabs>
-
       <Box
         sx={{
           flexGrow: 1,
           overflowY: 'auto',
-          p: 2,
           bgcolor: 'rgba(255,255,255,0.15)',
-          mx: 2,
-          my: 3,
           borderRadius: 3,
           boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+          width: '100%',
+          maxWidth: '600px',
+          p: 3,
         }}
       >
         <TabPanel value={tabIndex} index={0}>
@@ -107,7 +115,7 @@ export default function App() {
 }
 
 function UserList({ users }) {
-  const [expandedIndex, setExpandedIndex] = React.useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleToggle = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
